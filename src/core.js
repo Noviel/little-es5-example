@@ -28,15 +28,19 @@ function parseVehiclesData(data) {
   var airplanes = [];
   var boats = [];
 
-  data.forEach(vehicle => {
-    if (vehicle.type === "auto") {
-      autos.push(new Auto(vehicle));
-    } else if (vehicle.type === "airplane") {
-      airplanes.push(new Airplane(vehicle));
-    } else if (vehicle.type === "boat") {
-      boats.push(new Boat(vehicle));
+  data.forEach(vehicleData => {
+    var errors = validate(vehicleData);
+    if (errors.length) {
+      console.warn("Errors with vehicle data:", errors);
+    }
+    if (vehicleData.type === "auto") {
+      autos.push(new Auto(vehicleData));
+    } else if (vehicleData.type === "airplane") {
+      airplanes.push(new Airplane(vehicleData));
+    } else if (vehicleData.type === "boat") {
+      boats.push(new Boat(vehicleData));
     } else {
-      throw new Error("Unknown vehicle type '" + vehicle.type + "'.");
+      throw new Error("Unknown vehicle type '" + vehicleData.type + "'.");
     }
   });
 

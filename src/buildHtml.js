@@ -1,16 +1,10 @@
-var tableOrder = {
-  auto: ["name", "speed", "capacity", "body"],
-  airplane: ["name", "speed", "capacity", "wingspan"],
-  boat: ["name", "speed", "capacity", "maxpower"]
-};
-
-var tableIdsByVehicleType = {
-  auto: "tbl_auto",
-  airplane: "tbl_air",
-  boat: "tbl_boat"
-};
-
 function createOrderedProperties(properties) {
+  var tableOrder = {
+    auto: ["name", "speed", "capacity", "body"],
+    airplane: ["name", "speed", "capacity", "wingspan"],
+    boat: ["name", "speed", "capacity", "maxpower"]
+  };
+  
   var vehicleType = properties.type;
   var order = tableOrder[vehicleType];
   var orderedProperties = [];
@@ -38,6 +32,12 @@ function createTableRow(orderedProperties) {
 }
 
 function addVehiclesToTable(vehicles) {
+  var tableIdsByVehicleType = {
+    auto: "tbl_auto",
+    airplane: "tbl_air",
+    boat: "tbl_boat"
+  };
+
   var type = vehicles[0].type;
   for (var i = 0; i < vehicles.length; i++) {
     var table = document.getElementById(tableIdsByVehicleType[type]);
